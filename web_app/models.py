@@ -1,12 +1,27 @@
 # web_app/models.py
 
+from datetime import datetime
+
 from flask_sqlalchemy import SQLAlchemy
 
 from flask_migrate import Migrate
 
 db = SQLAlchemy()
 
+
 migrate = Migrate()
+
+
+class Tweet(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    author_id = db.Column(db.String(128))
+    text = db.Column(db.String(128))
+    date = db.Column(db.DATETIME)
+    favorites = db.Column(db.Integer)
+    retweets = db.Column(db.Integer)
+
+    def __repr__(self):
+        return f"<Tweet {self.author_id} {self.text}>"
 
 
 class Book(db.Model):

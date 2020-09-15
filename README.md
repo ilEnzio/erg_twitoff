@@ -28,7 +28,7 @@ FLASK_APP=web_app flask db upgrade #> creates the specified tables
 ## Usage
 
 ```sh
-FLASK_APP= web_app.py flask run
+FLASK_APP=web_app.py flask run
 ```
 This runs the app throught the __init__ file. 
 
