@@ -25,25 +25,25 @@ BASILICA_API_KEY = os.getenv("BASILICA_API_KEY")  # TODO use env var
 #     embedding = c.embed_sentence("Hello World!!!")
 #     breakpoint()
 
-sentences = [
-    'This is a sentence!',
-    "this is a similar sentence!",
-    "I don't think this sentence is very similar at all..."
 ]
-connection = Connection(BASILICA_API_KEY)
 
-
-if __name__ == "__main__":
-
+    connection = Connection(BASILICA_API_KEY)
     print("CONNECTION", type(connection))
 
-    embeddings = connection.embed_sentences(sentences)
 
-    print(list(embeddings))  # [[0.8556405305862427, ...], ...]
+    if __name__ == "__main__":
 
-    embedding = connection.embed_sentence("Hello World!!!", model="twitter")
-    print(type(embedding))  # <class 'list'>
-    print(type(embedding[0]))  # <class "float">
-    print(len(embedding))  # 768
+    sentences = [
+'This is a sentence!',
+"this is a similar sentence!",
+"I don't think this sentence is very similar at all..."
+embeddings = connection.embed_sentences(sentences)
 
-    breakpoint()
+print(list(embeddings))  # [[0.8556405305862427, ...], ...]
+
+embedding = connection.embed_sentence("Hello World!!!", model="twitter")
+print(type(embedding))  # <class 'list'>
+print(type(embedding[0]))  # <class "float">
+print(len(embedding))  # 768
+
+breakpoint()
