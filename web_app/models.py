@@ -48,7 +48,7 @@ class Tweet(db.Model):
     tweet_id = db.Column(db.BigInteger, primary_key=True)
     user_id = db.Column(db.BigInteger, db.ForeignKey("user.id"))
     text = db.Column(db.String(600))
-    num_embedding = db.Column
+    num_embedding = db.Column(db.PickleType)
 
     user = db.relationship("User", backref=db.backref("tweets", lazy=True))
 

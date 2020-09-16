@@ -36,22 +36,25 @@ def fetch_user(screen_name=None):
 
     # basilica_api = basilica_api_client()
 
-    # all_tweet_texts = [status.full_text for status in statuses]
-    # embeddings = list(basilica_api.embed_sentences(
-    #     all_tweet_texts, model="twitter"))
-    # print("NUMBER OF EMBEDDINGS", len(embeddings))
+    all_tweet_texts = [tweet.full_text for tweet in tweets]
+    num_embeddings = list(basilica_api_client.embed_sentences(
+        all_tweet_texts, model="twitter"))
+    print("NUMBER OF EMBEDDINGS", len(num_embeddings))
 
     # # TODO: explore using the zip() function maybe...
 
+    for index, status in enumerate(tweets):
+        num_embedding = num_embeddings[index]
     #   STORE TWEETS IN DATABASE
-    for status in tweets:
-        print(status.full_text)
-        print("----")
-        # print(dir(status))
-        # get existing tweet from the db or initialize a new one:
-        num_embedding = basilica_api_client.embed_sentence(
-            status.full_text, model="twitter")
-        print(len(num_embedding))
+    # slow loop
+    # for status in tweets:
+    #     print(status.full_text)
+    #     print("----")
+    #     # print(dir(status))
+    #     # get existing tweet from the db or initialize a new one:
+    #     num_embedding = basilica_api_client.embed_sentence(
+    #         status.full_text, model="twitter")
+    #     print(len(num_embedding))
 
         db_tweet = Tweet.query.get(
             status.id) or Tweet(tweet_id=status.id)
@@ -62,7 +65,7 @@ def fetch_user(screen_name=None):
         db_tweet.num_embedding = num_embedding
         db.session.add(db_tweet)
 
-    db.session.commit()
+        db.session.commit()
     # # breakpoint()
     return "OK"
     # return render_template("user.html", user=db_user, tweets=statuses) # tweets=db_tweets
