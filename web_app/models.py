@@ -12,16 +12,16 @@ db = SQLAlchemy()
 migrate = Migrate()
 
 
-class Tweet(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    author_id = db.Column(db.String(128))
-    text = db.Column(db.String(128))
-    date = db.Column(db.DATETIME)
-    favorites = db.Column(db.Integer)
-    retweets = db.Column(db.Integer)
+# class Tweet2(db.Model):
+#     id = db.Column(db.Integer, primary_key=True)
+#     author_id = db.Column(db.String(128))
+#     text = db.Column(db.String(128))
+#     date = db.Column(db.DATETIME)
+#     favorites = db.Column(db.Integer)
+#     retweets = db.Column(db.Integer)
 
-    def __repr__(self):
-        return f"<Tweet {self.author_id} {self.text}>"
+#     def __repr__(self):
+#         return f"<Tweet {self.author_id} {self.text}>"
 
 
 class Book(db.Model):
@@ -31,6 +31,29 @@ class Book(db.Model):
 
     def __repr__(self):
         return f"<Book {self.id} {self.title}>"
+
+
+class User(db.Model):
+    id = db.Column(db.BigInteger, primary_key=True)
+    name = db.Column(db.String(128))
+    screen_name = db.Column(db.String(128), nullable=False)
+    location = db.Column(db.String)
+    followers_count = db.Column(db.Integer)
+
+    def __repr__(self):
+        return f"<User {self.id} {self.name}>"
+
+
+class Tweet(db.Model):
+    tweet_id = db.Column(db.BigInteger, primary_key=True)
+    user_id = db.Column(db.BigInteger, db.ForeignKey("user.id"))
+    text = db.Column(db.String(600))
+    num_embedding = db.Column
+
+    user = db.relationship("User", backref=db.backref("tweets", lazy=True))
+
+    def __repr__(self):
+        return f"<Tweet {self.user_id} {self.tweet_id}>"
 
 
 def parse_records(database_records):

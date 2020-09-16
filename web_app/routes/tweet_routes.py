@@ -1,4 +1,4 @@
-# web_app/routes/home_routes.py
+# web_app/routes/tweet_routes.py
 
 
 from flask import Blueprint, jsonify, request, render_template
