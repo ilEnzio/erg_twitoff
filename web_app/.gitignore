@@ -3,3 +3,6 @@
 migration/
 
 *.db
+
+# ignore secret credentials
+.env
