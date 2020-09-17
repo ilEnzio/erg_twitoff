@@ -25,7 +25,7 @@ BASILICA_API_KEY = os.getenv("BASILICA_API_KEY")  # TODO use env var
 #     embedding = c.embed_sentence("Hello World!!!")
 #     breakpoint()
 
-
+# at the top we imported the Connection object directly
 connection = Connection(BASILICA_API_KEY)
 print("CONNECTION", type(connection))
 

@@ -30,12 +30,11 @@ def fetch_user(screen_name=None):
     # Fetch Tweets!!!
 
     tweets = twitter_api_client.user_timeline(
-        screen_name, tweet_mode="extended", count=150, exclude_replies=True, include_rts=False)
+        screen_name, tweet_mode="extended", count=250, exclude_replies=True, include_rts=False)
     print("STATUSES COUNT:", len(tweets))
     # return jsonify({"user": user._json, "tweets": [s._json for s in statuses]})
 
-    # basilica_api = basilica_api_client()
-
+    # extract just the text from the status objects, because tweets have a lot more than text
     all_tweet_texts = [tweet.full_text for tweet in tweets]
     num_embeddings = list(basilica_api_client.embed_sentences(
         all_tweet_texts, model="twitter"))
@@ -65,6 +64,7 @@ def fetch_user(screen_name=None):
         db_tweet.num_embedding = num_embedding
         db.session.add(db_tweet)
 
+        # TODO: Change to context syntax
         db.session.commit()
     # # breakpoint()
     return "OK"
