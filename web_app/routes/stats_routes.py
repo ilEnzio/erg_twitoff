@@ -5,7 +5,7 @@ from flask import Blueprint, request, jsonify, render_template
 from sklearn.linear_model import LogisticRegression  # for example
 
 from web_app.models import User, Tweet
-from web_app.services.basilica_service import basilica_api_client
+# from web_app.services.basilica_service import basilica_api_client
 
 stats_routes = Blueprint("stats_routes", __name__)
 
@@ -35,7 +35,7 @@ def predict():
 
     # TODO
 
-    return render_template("results.html",
+    return render_template("prediction_results.html",
                            screen_name_a=screen_name_a,
                            screen_name_b=screen_name_b,
                            tweet_text=tweet_text,
