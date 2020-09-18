@@ -1,6 +1,9 @@
 # web_app/__init__.py
 
 from flask import Flask
+import os
+from dotenv import load_dotenv
+
 
 from web_app.models import db, migrate
 from web_app.routes.home_routes import home_routes
@@ -9,8 +12,10 @@ from web_app.routes.book_routes import book_routes
 from web_app.routes.twitter_routes import twitter_routes
 from web_app.routes.stats_routes import stats_routes
 
+load_dotenv()
 
-DATABASE_URL = "sqlite:///erg_twitoff_development.db"  # using relative filepath
+
+DATABASE_URL = os.getenv("DATABASE_URL")  # using relative filepath
 # DATABASE_URL = "sqlite:////Users/Username/Desktop/your-repo-name/web_app_99.db" # using absolute filepath on Mac (recommended)
 # DATABASE_URL = "sqlite:///C:\\Users\\Username\\Desktop\\your-repo-name\\web_app_99.db" # using absolute filepath on Windows (recommended) h/t: https://stackoverflow.com/a/19262231/670433
 

@@ -131,3 +131,8 @@ dmypy.json
 # the env var
 
 .env
+# ignore local db stuff
+
+migration/
+
+*.db
