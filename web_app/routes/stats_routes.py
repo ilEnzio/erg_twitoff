@@ -79,18 +79,19 @@ def predict():
     print("-----------------")
     print("MAKING A PREDICTION...")
 
-    example_embed_a = user_a_tweets[0].num_embedding
-    example_embed_b = user_b_tweets[0].num_embedding
+    # example_embed_a = user_a_tweets[0].num_embedding
+    # example_embed_b = user_b_tweets[0].num_embedding
 
-    prediction01 = classifier.predict([example_embed_a, example_embed_b])
+    # prediction01 = classifier.predict([example_embed_a, example_embed_b])
 
-    print(prediction01)
+    # print(prediction01)
     # take the basilica object and embed the tweet.text
     # Then put that through the classifier.
-    twetext_embedding = basilica_api_client.embed_sentence(-----, model="twitter")
+    twetext_embedding = basilica_api_client.embed_sentence(
+        tweet_text, model="twitter")
     prediction02 = classifier.predict([twetext_embedding, ])
 
-    print(prediction02)
+    print(prediction02[0])  # we'll pass this to the screen_name most likely
 
     breakpoint()
 
